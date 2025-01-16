@@ -1,5 +1,5 @@
 # Geospatial Solutions for Smart Grid Implementation
-  - Project Code: BTP-2022-107
+
 ## Project Description:
 -
     - The current project aims to use the potential of geospatial technology in conjunction with the computational and communication technologies towards implementing a ‘Smart Power Grid’ network for select regions of India.
