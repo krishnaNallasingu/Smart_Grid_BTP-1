@@ -1,6 +1,6 @@
 # Geospatial Solutions for Smart Grid Implementation
   - Project Code: BTP-2022-107
-# Project Description:
+## Project Description:
 -
     - The current project aims to use the potential of geospatial technology in conjunction with the computational and communication technologies towards implementing a ‘Smart Power Grid’ network for select regions of India.
     - A smart grid is an electricity network that uses digital and other advanced technologies to monitor and manage the transport of electricity from all generation sources to meet the varying electricity demands of end users. A smart grid system has multi-fold advantages compared to the traditional electricity grid system in that it can be (a) monitored real-time or near-real-time, (b) allow digital communication, (c) have advanced metering infrastructure, (d) Distributed Energy Resources (DER) integration including renewable energy resources and (e) automation, thus with increased reliability.
