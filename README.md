@@ -11,7 +11,7 @@
   
 # All the documnets related to the BTP are availabele here
 
-## Proffessor:
+## Professor:
  - Rakesh Kiran Chand Tumaty
  - Lab for Spatial Informatics
 
