@@ -9,7 +9,7 @@
     - The methods would include using of geospatial data (analysis ready satellite data proxies (raw and derived), GIS data and auxillary information) and AI/ML models to achieve the objectives.
     - Major deliverables targeted at the end of the project will be (a) spatial models and interactive maps towards implementing a smart grid and (b) web/mobile apps
   
-# All the documnets related to the BTP are availabele here
+# All the documnets related to the BTP are availabele here 
 
 ## Professor:
  - Rakesh Kiran Chand Tumaty
@@ -26,5 +26,4 @@
 
 ## Data Extraction :
 https://extract.bbbike.org/
- 
-Yoooooooo
+
