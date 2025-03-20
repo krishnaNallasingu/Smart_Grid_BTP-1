@@ -2,12 +2,12 @@ import rasterio
 from rasterio.transform import Affine
 
 # Input and output file paths
-input_raster = "misaligned.tif"  # Replace with your raster file
-output_raster = "aligned.tif"
+input_raster = "Nighttime_Lights.tif"  # Replace with your raster file
+output_raster = "Nightlights_shifted.tif"
 
 # Shift parameters (modify as needed)
-shift_x = 0   # No shift in X direction
-shift_y = -10  # Shift downward by 10 units (adjust as per your CRS unit)
+shift_x = 3     # No shift in X direction
+shift_y = -35   # Shift downward by 10 units (adjust as per your CRS unit)
 
 # Open the raster
 with rasterio.open(input_raster) as src:
