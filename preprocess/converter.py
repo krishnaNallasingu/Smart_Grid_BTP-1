@@ -15,21 +15,19 @@ def convert_lulc_to_png(input_folder, output_folder):
             
             # Read TIFF file
             with rasterio.open(input_path) as src:
-                # Read all bands
-                image_data = src.read()
+                # Read the single band data
+                image_data = src.read(1)  # Read first band
                 
-                # Create binary image (black and white)
-                binary_image = np.zeros_like(image_data[0])
-                
-                # Set pixels where band 13 has data to white (255)
-                # Note: bands are 0-indexed in the array
-                binary_image[image_data[12] > 0] = 255
+                # Create a colored image based on LULC values (0-17)
+                # Normalize to 0-255 range and create a gradient
+                normalized = (image_data * (255 // 17)).astype(np.uint8)
                 
                 # Create PIL Image from numpy array
-                img = Image.fromarray(binary_image.astype(np.uint8))
+                img = Image.fromarray(normalized)
                 
                 # Save as PNG
                 img.save(output_path)
+                print(f"Converted {filename} - Value range: {image_data.min()} to {image_data.max()}")
 
 def convert_ntl_to_png(input_folder, output_folder):
     # Create output folder if it doesn't exist
@@ -43,27 +41,29 @@ def convert_ntl_to_png(input_folder, output_folder):
             
             # Read TIFF file
             with rasterio.open(input_path) as src:
-                # Read the data
-                image_data = src.read(1)  # Read first band
+                # Read the single band data
+                image_data = src.read(1)
                 
-                # Normalize and enhance brightness
-                # Scale to 0-255 range
-                image_data = ((image_data - image_data.min()) * 255.0 / 
+                # Normalize to 0-255 range
+                normalized = ((image_data - image_data.min()) * 255.0 / 
                             (image_data.max() - image_data.min()))
                 
-                # Enhance brightness by increasing values
-                enhanced_data = np.clip(image_data * 1.5, 0, 255)
+                # Enhance brightness
+                enhanced = np.clip(normalized * 2, 0, 255)  # Increased brightness multiplier
                 
                 # Create PIL Image
-                img = Image.fromarray(enhanced_data.astype(np.uint8))
+                img = Image.fromarray(enhanced.astype(np.uint8))
                 
                 # Save as PNG
                 img.save(output_path)
+                print(f"Converted {filename} - Value range: {image_data.min()} to {image_data.max()}")
 
 # Create output directories
-os.makedirs("./Png_Files/LULC", exist_ok=True)
-os.makedirs("./Png_Files/NTL", exist_ok=True)
+os.makedirs("../Png_Files/LULC", exist_ok=True)
+os.makedirs("../Png_Files/NTL", exist_ok=True)
 
 # Convert files
-convert_lulc_to_png("./Tiff_files/LULC", "./Png_Files/LULC")
-convert_ntl_to_png("./Tiff_files/NTL", "./Png_Files/NTL")
+print("Converting LULC files...")
+convert_lulc_to_png("../Tiff_files/LULC", "../Png_Files/LULC")
+print("\nConverting NTL files...")
+convert_ntl_to_png("../Tiff_files/NTL", "../Png_Files/NTL")
