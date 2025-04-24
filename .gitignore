@@ -1,13 +1,20 @@
-/Corelation/new
-./Corelation/*
-./MachineLearning/*
-./Corelation
-./MachhineLearning
-./correcte*
-./prediction/*
-./prediction
-./BTP-1.pdf
-./Smart-Grid_Project.pdf
-./electronics-09-01030.pdf
-./hyderabad LULC tile0.qgz
-./presentation.pdf
+# Directories
+/Corelation/
+/MachineLearning/
+/prediction/
+/corrected crs/
+
+# PDF files
+*.pdf
+
+# QGIS project files
+*.qgz
+
+# Avoid potential typos in directory names
+/MachhineLearning/
+
+# Specific files in Corelation directory that shouldn't be tracked
+/Corelation/new/
+
+# Temporary files
+*.aux.xml
