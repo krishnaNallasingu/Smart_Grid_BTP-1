@@ -34,12 +34,8 @@ def convert_ntl_to_png(input_folder, output_folder):
     os.makedirs(output_folder, exist_ok=True)
     
     # Define a fixed range for normalization (based on typical NTL values)
-    # These values can be adjusted based on your specific needs
     min_value = 0
     max_value = 63  # Common max value for NTL data
-    
-    # Create colormap
-    colormap = plt.cm.viridis  # Using viridis colormap which is perceptually uniform
     
     # Process each TIFF file in the input folder
     for filename in os.listdir(input_folder):
@@ -55,25 +51,19 @@ def convert_ntl_to_png(input_folder, output_folder):
                 # Clip values to our fixed range
                 image_data = np.clip(image_data, min_value, max_value)
                 
-                # Normalize to 0-1 range using fixed min/max values
-                normalized = (image_data - min_value) / (max_value - min_value)
-                
-                # Apply colormap
-                colored = (colormap(normalized) * 255).astype(np.uint8)
-                
-                # Extract RGB channels (removing alpha channel)
-                rgb_image = colored[:, :, :3]
+                # Normalize to 0-255 range for grayscale
+                grayscale = ((image_data - min_value) / (max_value - min_value) * 255).astype(np.uint8)
                 
                 # Enhance brightness
                 brightness_factor = 1.5  # Adjust this value to increase/decrease brightness
-                enhanced = np.clip(rgb_image * brightness_factor, 0, 255).astype(np.uint8)
+                enhanced = np.clip(grayscale * brightness_factor, 0, 255).astype(np.uint8)
                 
-                # Create PIL Image
-                img = Image.fromarray(enhanced)
+                # Create PIL Image (mode='L' for grayscale)
+                img = Image.fromarray(enhanced, mode='L')
                 
                 # Save as PNG
                 img.save(output_path)
-                print(f"Converted {filename} - Using consistent colormap with enhanced brightness")
+                print(f"Converted {filename} - Grayscale image with enhanced brightness")
 
 # Create output directories
 os.makedirs("../Png_Files/LULC", exist_ok=True)
