@@ -32,6 +32,7 @@ Smart_Grid_BTP-1/
 ├── README.md           # Project description and documentation
 ├── readme.md          # Instructions to run the code
 ├── requirements.txt   # Python package dependencies
+├── predictor.py       # Main prediction script
 ├── Png_Files/        # Converted PNG image files
 │   ├── LULC/        # Land Use Land Cover PNG images (2014-2022)
 │   └── NTL/         # Night Time Lights PNG images (2014-2022)
