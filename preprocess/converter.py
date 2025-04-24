@@ -29,31 +29,17 @@ def convert_lulc_to_png(input_folder, output_folder):
                 img.save(output_path)
                 print(f"Converted {filename} - Binary image with value 13 highlighted")
 
-def get_global_min_max(input_folder):
-    global_min = float('inf')
-    global_max = float('-inf')
-    
-    for filename in os.listdir(input_folder):
-        if filename.endswith('.tif'):
-            input_path = os.path.join(input_folder, filename)
-            with rasterio.open(input_path) as src:
-                image_data = src.read(1)
-                global_min = min(global_min, np.nanmin(image_data))
-                global_max = max(global_max, np.nanmax(image_data))
-    
-    return global_min, global_max
-
 def convert_ntl_to_png(input_folder, output_folder):
     # Create output folder if it doesn't exist
     os.makedirs(output_folder, exist_ok=True)
     
-    # Get global min and max values across all images
-    global_min, global_max = get_global_min_max(input_folder)
-    print(f"Global value range: {global_min} to {global_max}")
+    # Define a fixed range for normalization (based on typical NTL values)
+    # These values can be adjusted based on your specific needs
+    min_value = 0
+    max_value = 63  # Common max value for NTL data
     
-    # Create a colormap (yellow to bright white)
-    colors = plt.cm.YlOrRd(np.linspace(0, 1, 256))
-    colors = (colors[:, :3] * 255).astype(np.uint8)
+    # Create colormap
+    colormap = plt.cm.viridis  # Using viridis colormap which is perceptually uniform
     
     # Process each TIFF file in the input folder
     for filename in os.listdir(input_folder):
@@ -63,23 +49,31 @@ def convert_ntl_to_png(input_folder, output_folder):
             
             # Read TIFF file
             with rasterio.open(input_path) as src:
+                # Read the single band data
                 image_data = src.read(1)
                 
-                # Normalize using global min-max
-                normalized = np.clip((image_data - global_min) * 255.0 / (global_max - global_min), 0, 255)
+                # Clip values to our fixed range
+                image_data = np.clip(image_data, min_value, max_value)
                 
-                # Convert to uint8
-                normalized = normalized.astype(np.uint8)
+                # Normalize to 0-1 range using fixed min/max values
+                normalized = (image_data - min_value) / (max_value - min_value)
                 
                 # Apply colormap
-                colored = colors[normalized]
+                colored = (colormap(normalized) * 255).astype(np.uint8)
+                
+                # Extract RGB channels (removing alpha channel)
+                rgb_image = colored[:, :, :3]
+                
+                # Enhance brightness
+                brightness_factor = 1.5  # Adjust this value to increase/decrease brightness
+                enhanced = np.clip(rgb_image * brightness_factor, 0, 255).astype(np.uint8)
                 
                 # Create PIL Image
-                img = Image.fromarray(colored)
+                img = Image.fromarray(enhanced)
                 
                 # Save as PNG
                 img.save(output_path)
-                print(f"Converted {filename}")
+                print(f"Converted {filename} - Using consistent colormap with enhanced brightness")
 
 # Create output directories
 os.makedirs("../Png_Files/LULC", exist_ok=True)
