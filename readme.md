@@ -17,6 +17,12 @@ cd preprocess
 python3 converter.py
 ```
 
+### 4. Predict Locations of Power Plants
+```bash
+cd ..
+python3 predictor.py
+```
+
 ---
 
 # File Structure
