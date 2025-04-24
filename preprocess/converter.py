@@ -18,16 +18,15 @@ def convert_lulc_to_png(input_folder, output_folder):
                 # Read the single band data
                 image_data = src.read(1)  # Read first band
                 
-                # Create a colored image based on LULC values (0-17)
-                # Normalize to 0-255 range and create a gradient
-                normalized = (image_data * (255 // 17)).astype(np.uint8)
+                # Create binary image: 255 (white) for value 13, 0 (black) for others
+                binary = np.where(image_data == 13, 255, 0).astype(np.uint8)
                 
                 # Create PIL Image from numpy array
-                img = Image.fromarray(normalized)
+                img = Image.fromarray(binary)
                 
                 # Save as PNG
                 img.save(output_path)
-                print(f"Converted {filename} - Value range: {image_data.min()} to {image_data.max()}")
+                print(f"Converted {filename} - Binary image with value 13 highlighted")
 
 def convert_ntl_to_png(input_folder, output_folder):
     # Create output folder if it doesn't exist
