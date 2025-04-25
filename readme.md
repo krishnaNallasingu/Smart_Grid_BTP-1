@@ -42,3 +42,7 @@ Smart_Grid_BTP-1/
     ├── LULC/        # Land Use Land Cover TIFF images (2014-2022)
     └── NTL/         # Night Time Lights TIFF images (2014-2022)
 ```
+
+# Datasets
+- NightLights : [VIIRS](https://developers.google.com/earth-engine/datasets/catalog/NOAA_VIIRS_DNB_MONTHLY_V1_VCMCFG)
+- lulc : [MODIS](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MCD12Q1)
