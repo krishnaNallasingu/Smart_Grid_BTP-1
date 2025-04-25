@@ -46,3 +46,4 @@ Smart_Grid_BTP-1/
 # Datasets
 - NightLights : [VIIRS](https://developers.google.com/earth-engine/datasets/catalog/NOAA_VIIRS_DNB_MONTHLY_V1_VCMCFG)
 - lulc : [MODIS](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MCD12Q1)
+- model : [Kaggle](https://www.kaggle.com/code/susheelkrishna2/ntl-predictions)
