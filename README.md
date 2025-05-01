@@ -1,3 +1,5 @@
+![alternate](https://github.com/krishnaNallasingu/Smart_Grid_BTP-1/blob/main/images/logo.jpg)
+
 # How to run the code ? 
 ### 1. Clone the Repository
 ```bash
