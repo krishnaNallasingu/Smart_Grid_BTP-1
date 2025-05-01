@@ -8,9 +8,11 @@ from PIL import Image
 # ========== PARAMETERS ==========
 NUM_GRIDS = 15                         # Number of power grids to be placed
 MIN_DISTANCE_KM = 50                   # Minimum distance between two grids (in km)
-INTENSITY_THRESHOLD = 200              # Brightness threshold to select pixels
-# IMAGE_PATH = "./Png_Files/NTL/NightLights_2020.png"
-IMAGE_PATH = "./Batch_Loads/Png/NTL_01/NTL_2022.png"
+INTENSITY_THRESHOLD = 20              # Brightness threshold to select pixels
+# IMAGE_PATH = "./Real_World/Png_Files/GHSL_01/GHSL_2020.png"
+# IMAGE_PATH = "./Batch_Loads/Png/NTL_02/NTL_2022.png"
+IMAGE_PATH = "./Real_World/Croped_Pngs/GHSL_01/GHSL_2015_destretched.png"
+
 
 # Coordinates of the image corners (top-left, bottom-left, bottom-right, top-right)
 COORDINATES = [
@@ -74,5 +76,5 @@ for (x, y) in final_centers:
     plt.scatter(x, y, color='red', s=50, edgecolors='black')
 plt.title("Suggested Power Grid Locations")
 plt.axis('off')
-plt.savefig("Suggested_Power_Grids.png", bbox_inches="tight")
+plt.savefig("Suggested_Power_Grids2.png", bbox_inches="tight")
 plt.show()

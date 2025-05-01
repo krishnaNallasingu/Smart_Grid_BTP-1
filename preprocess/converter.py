@@ -3,6 +3,9 @@ import rasterio
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
+from rasterio.features import geometry_mask
+from rasterio.mask import mask
+from shapely.geometry import box, mapping
 
 def convert_lulc_to_png(input_folder, output_folder):
     # Create output folder if it doesn't exist
@@ -66,45 +69,49 @@ def convert_ntl_to_png(input_folder, output_folder):
                 print(f"Converted {filename} - Grayscale image with enhanced brightness")
 
 def convert_ghsl_to_png(input_folder, output_folder):
-    # Create output folder if it doesn't exist
     os.makedirs(output_folder, exist_ok=True)
 
-    # Process each TIFF file in the input folder
     for filename in os.listdir(input_folder):
         if filename.endswith('.tif'):
             input_path = os.path.join(input_folder, filename)
             output_path = os.path.join(output_folder, filename.replace('.tif', '.png'))
 
-            # Read TIFF file
             with rasterio.open(input_path) as src:
-                # Read the single band data
-                image_data = src.read(1).astype(np.float32)  # Read as float for normalization
+                data = src.read(1)
+                mask_data = data != src.nodata if src.nodata is not None else ~np.isnan(data)
 
-                # Find the minimum and maximum values in the image data
-                min_value = np.nanmin(image_data)
-                max_value = np.nanmax(image_data)
+                # Get bounding box of valid data
+                rows, cols = np.where(mask_data)
+                if len(rows) == 0 or len(cols) == 0:
+                    print(f"Skipping empty: {filename}")
+                    continue
 
-                # Normalize the data to the 0-255 range
+                min_row, max_row = rows.min(), rows.max()
+                min_col, max_col = cols.min(), cols.max()
+
+                # Crop to valid data
+                cropped = data[min_row:max_row+1, min_col:max_col+1]
+                cropped_mask = mask_data[min_row:max_row+1, min_col:max_col+1]
+
+                # Normalize the valid data
+                valid_pixels = cropped[cropped_mask]
+                min_value = valid_pixels.min()
+                max_value = valid_pixels.max()
+
                 if max_value > min_value:
-                    normalized_data = ((image_data - min_value) / (max_value - min_value) * 255).astype(np.uint8)
+                    norm = (cropped - min_value) / (max_value - min_value)
+                    norm[~cropped_mask] = 0  # Set background to black
+                    norm = (norm * 255).astype(np.uint8)
                 else:
-                    # If all values are the same, create a uniform image
-                    normalized_data = np.full_like(image_data, 0, dtypenp.uint8)
+                    norm = np.full_like(cropped, 0, dtype=np.uint8)
 
-                # Enhance contrast (optional - adjust factor as needed)
-                contrast_factor = 1.2
-                enhanced_data = np.clip((normalized_data - 127.5) * contrast_factor + 127.5, 0, 255).astype(np.uint8)
-
-                # Create PIL Image (mode='L' for grayscale)
-                img = Image.fromarray(enhanced_data, mode='L')
-
-                # Save as PNG
+                img = Image.fromarray(norm, mode='L')
                 img.save(output_path)
-                print(f"Converted {filename} - Normalized and enhanced grayscale image")
+                print(f"Converted and saved: {filename}")
 
 
 # Create output directories
-os.makedirs("../Real_World/Png_Files/GHSL_02", exist_ok=True)
+os.makedirs("../Real_World/Png_Files/GHSL_01", exist_ok=True)
 # os.makedirs("../Png_Files/NTL", exist_ok=True)
 
 # Convert files
@@ -114,4 +121,4 @@ os.makedirs("../Real_World/Png_Files/GHSL_02", exist_ok=True)
 # convert_ntl_to_png("../Tiff_files/NTL", "../Png_Files/NTL")
 
 print("Converting GHSL files...")
-convert_ghsl_to_png("../Real_World/Data/GHSL_02_Nashvillie", "../Real_World/Png_Files/GHSL_02")
+convert_ghsl_to_png("../Real_World/Data/GHSL_01_Washington", "../Real_World/Png_Files/GHSL_01")
