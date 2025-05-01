@@ -9,6 +9,14 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
 /*WASHINGTON*/
 /* WORKS FOR EVERY 5 YEARS*/
 
+var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
+        [[[-88.30848858938721, 37.288817604934025],
+          [-88.30848858938721, 35.153052590149485],
+          [-85.46302960501221, 35.153052590149485],
+          [-85.46302960501221, 37.288817604934025]]], null, false);
+
+/*NASHVILLIE*/
+
 var startYear = 2014;
 var endYear = 2030;
 
