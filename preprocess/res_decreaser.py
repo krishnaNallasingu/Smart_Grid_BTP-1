@@ -2,8 +2,8 @@ import os
 from PIL import Image
 
 # Input and output folder paths
-input_folder = '../Batch_Loads/Png/NTL_02'
-output_folder = '../Batch_Loads/Low_Png/NTL_02'
+input_folder = '../Batch_Loads/Png/NTL_03'
+output_folder = '../Batch_Loads/Low_Png/NTL_03'
 os.makedirs(output_folder, exist_ok=True)
 
 # Target resolution
