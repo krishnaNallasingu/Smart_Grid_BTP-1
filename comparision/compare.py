@@ -32,10 +32,10 @@ def compute_difference(image_path_early, image_path_late, output_filename, thres
 # === Call the function for each comparison ===
 
 # 1.png to 9.png → actual difference 2014–2022
-compute_difference('Input/1.png', 'Input/9.png', 'Output/actual_difference_2014_2022.png', color=(255, 0, 0))
+compute_difference('Input/1.png', 'Input/9.png', 'Output/_delhi_actual_difference_2014_2022.png', color=(255, 0, 0))
 
 # 10.png to 19.png → prediction difference 2022–2032
-compute_difference('Input/10.png', 'Input/19.png', 'Output/prediction_difference_2022_2032.png', color=(0, 255, 0))
+compute_difference('Input/10.png', 'Input/19.png', 'Output/_delhi_prediction_difference_2022_2032.png', color=(0, 255, 0))
 
 # 1.png to 19.png → total difference 2014–2032
-compute_difference('Input/1.png', 'Input/19.png', 'Output/complete_difference_2014_2032.png', color = (0, 0, 255))
+compute_difference('Input/1.png', 'Input/19.png', 'Output/_delhi_complete_difference_2014_2032.png', color = (0, 0, 255))

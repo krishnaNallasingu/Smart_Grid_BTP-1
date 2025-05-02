@@ -47,7 +47,7 @@ legend_img = plt.imshow(first_lit, cmap=ListedColormap(cmap), norm=norm)
 plt.colorbar(legend_img, ticks=range(0, 20), label='Year of First Illumination')
 plt.axis('off')
 plt.title("Nighttime Lights Onset Map")
-plt.savefig('Output/growth_rate_map_with_legend.png', bbox_inches='tight')
+plt.savefig('Output/_delhi_growth_rate_map_with_legend.png', bbox_inches='tight')
 plt.show()
 
 print("Saved: growth_rate_map.png and growth_rate_map_with_legend.png")

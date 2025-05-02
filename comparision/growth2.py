@@ -29,5 +29,5 @@ plt.title('Nightlights Growth Frequency Map (2014–2032)')
 plt.axis('off')
 
 # Save
-plt.savefig('Output/growth_frequency_colored_map.png', bbox_inches='tight', dpi=300)
+plt.savefig('Output/_delhi_growth_frequency_colored_map.png', bbox_inches='tight', dpi=300)
 plt.show()
