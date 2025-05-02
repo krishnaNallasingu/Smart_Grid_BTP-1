@@ -111,7 +111,7 @@ def convert_ghsl_to_png(input_folder, output_folder):
 
 
 # Create output directories
-os.makedirs("../Real_World/Png_Files/GHSL_01", exist_ok=True)
+# os.makedirs("../Real_World/Png_Files/GHSL_01", exist_ok=True)
 # os.makedirs("../Png_Files/NTL", exist_ok=True)
 
 # Convert files
@@ -120,5 +120,7 @@ os.makedirs("../Real_World/Png_Files/GHSL_01", exist_ok=True)
 # print("\nConverting NTL files...")
 # convert_ntl_to_png("../Tiff_files/NTL", "../Png_Files/NTL")
 
-print("Converting GHSL files...")
-convert_ghsl_to_png("../Real_World/Data/GHSL_01_Washington", "../Real_World/Png_Files/GHSL_01")
+# print("Converting GHSL files...")
+# convert_ghsl_to_png("../Real_World/Data/GHSL_01_Washington", "../Real_World/Png_Files/GHSL_01")
+
+convert_ntl_to_png("../Batch_Loads/Tiff/NTL_03_Delhi", "../Batch_Loads/Png/NTL_03")
