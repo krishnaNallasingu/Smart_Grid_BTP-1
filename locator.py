@@ -10,7 +10,7 @@ NUM_GRIDS = 15                         # Number of power grids to be placed
 MIN_DISTANCE_KM = 50                   # Minimum distance between two grids (in km)
 INTENSITY_THRESHOLD = 200              # Brightness threshold to select pixels
 # IMAGE_PATH = "./Png_Files/NTL/NightLights_2020.png"
-IMAGE_PATH = "./Batch_Loads/Png/NTL_01/NTL_2022.png"
+IMAGE_PATH = "./Batch_Loads/Png/NTL_02/NTL_2022.png"
 
 # Coordinates of the image corners (top-left, bottom-left, bottom-right, top-right)
 COORDINATES = [
