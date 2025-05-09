@@ -78,7 +78,10 @@ Smart_Grid_BTP-1/
 - lulc : [MODIS](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MCD12Q1)
 - model : [Kaggle](https://www.kaggle.com/code/susheelkrishna2/ntl-predictions)
 - GHSL : [Google Earth Engine](https://developers.google.com/earth-engine/datasets/catalog/JRC_GHSL_P2023A_GHS_BUILT_S#description)
+- Final Presentation: [canva](https://www.canva.com/design/DAGmd8N1DDk/a3d2r4E0oYxRFX2EjkxoAw/edit?utm_content=DAGmd8N1DDk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 # Notes :
 - unable to get OSM data because it is very high resolution and out night lights data is covered over nearly 25K sqkm. so as a proxy to the osm, we are using ghsl data.
 - ghsl data is available from 1975 to 2030 for every 5 years only. so while comparing, we are comparing only every 5th year!
+
+  # Thank You
