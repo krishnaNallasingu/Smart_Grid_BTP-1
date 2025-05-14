@@ -8,8 +8,9 @@ from PIL import Image
 # ========== PARAMETERS ==========
 NUM_GRIDS = 15                         # Number of power grids to be placed
 MIN_DISTANCE_KM = 50                   # Minimum distance between two grids (in km)
-# IMAGE_PATH = "./Png_Files/NTL/NightLights_2020.png"
-IMAGE_PATH = "./Batch_Loads/Png/NTL_01/NTL_2022.png"
+# IMAGE_PATH = "./Real_World/Png_Files/GHSL_01/GHSL_2020.png"
+# IMAGE_PATH = "./Batch_Loads/Png/NTL_02/NTL_2022.png"
+IMAGE_PATH = "./Real_World/Croped_Pngs/GHSL_01/GHSL_2015_destretched.png"
 
 # Coordinates of the image corners (top-left, bottom-left, bottom-right, top-right)
 COORDINATES = [
@@ -59,14 +60,14 @@ def get_bright_pixels(image_array, threshold):
 
 bright_pixels = get_bright_pixels(image_array, INTENSITY_THRESHOLD)
 
-# If too few bright pixels are selected, lower the percentile and re-run
+# Step 4: Check if enough pixels
 if bright_pixels.shape[0] < NUM_GRIDS:
     raise ValueError(f"Too few bright pixels ({bright_pixels.shape[0]}) found at threshold {INTENSITY_THRESHOLD:.2f}. Try a lower percentile.")
 
 # ========== K-MEANS CLUSTERING ==========
 kmeans = KMeans(n_clusters=NUM_GRIDS, random_state=42)
 kmeans.fit(bright_pixels)
-final_centers = kmeans.cluster_centers_.astype(int)  # Convert to integer pixel positions
+final_centers = kmeans.cluster_centers_.astype(int)
 
 # ========== VISUALIZATION ==========
 plt.figure(figsize=(12, 8))
@@ -75,7 +76,7 @@ for (x, y) in final_centers:
     plt.scatter(x, y, color='red', s=50, edgecolors='black')
 plt.title("Suggested Power Grid Locations")
 plt.axis('off')
-plt.savefig("Suggested_Power_Grids.png", bbox_inches="tight")
+plt.savefig("Suggested_Power_Grids2.png", bbox_inches="tight")
 plt.show()
 
 # ========== OPTIONAL: EXPORT GEO COORDINATES ==========
@@ -83,9 +84,9 @@ grid_locations_geo = [pixel_to_geo(x, y, width, height) for (x, y) in final_cent
 
 # Save to CSV
 import csv
-with open("grid_locations.csv", "w", newline="") as csvfile:
+with open("grid_locations_2.csv", "w", newline="") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(["Latitude", "Longitude"])
     writer.writerows(grid_locations_geo)
 
-print("Geo-coordinates of grid locations saved to 'grid_locations.csv'")
+print("Geo-coordinates of grid locations saved to 'grid_locations_2.csv'")
