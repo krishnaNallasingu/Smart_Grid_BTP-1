@@ -4,8 +4,8 @@
 /prediction/
 /corrected crs/
 
-# PDF files
-*.pdf
+# # PDF files
+# *.pdf
 
 # QGIS project files
 *.qgz

@@ -139,5 +139,6 @@ Smart_Grid_BTP-1/
 
 ## Acknowledgments
 - **Final Presentation:** [Canva](https://www.canva.com/design/DAGmd8N1DDk/a3d2r4E0oYxRFX2EjkxoAw/edit?utm_content=DAGmd8N1DDk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+- **Final Report :** [Google Docs](https://docs.google.com/document/d/14n3FD11tJFVa8hbgufxvbekSKAJLKgDOoBr4qJ1nPAg/edit?usp=sharing)
 
 Thank you for exploring this project!
