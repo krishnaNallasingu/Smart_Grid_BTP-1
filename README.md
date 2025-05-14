@@ -1,87 +1,143 @@
-![alternate](https://github.com/krishnaNallasingu/Smart_Grid_BTP-1/blob/main/logo.jpg)
+![Smart Grid Logo](https://github.com/krishnaNallasingu/Smart_Grid_BTP-1/blob/main/logo.jpg)
 
-# How to run the code ? 
+# Smart Grid BTP-1
+
+This project focuses on analyzing and predicting ideal power grid locations using various datasets such as Night Time Lights (NTL), Land Use Land Cover (LULC), and Global Human Settlement Layer (GHSL). The project involves preprocessing data, predicting power grid locations, and visualizing results.
+
+---
+
+## Table of Contents
+1. [Setup Instructions](#setup-instructions)
+2. [Execution Steps](#execution-steps)
+3. [File Structure](#file-structure)
+4. [Datasets](#datasets)
+5. [Notes](#notes)
+6. [Acknowledgments](#acknowledgments)
+
+---
+
+## Setup Instructions
+
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/krishnaNallasingu/Smart_Grid_BTP-1.git
 ```
 
-### 2. Install Dependencies
+### 2. Create a Virtual Environment and Install Dependencies
 ```bash
+cd Smart_Grid_BTP-1
 python3 -m venv env
 source ./env/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Converting the images
+---
+
+## Execution Steps
+
+### 1. Preprocess the Data
+#### Convert TIFF files to PNG format:
 ```bash
 cd preprocess
 python3 converter.py
 ```
+This script processes TIFF files and converts them into PNG format for further analysis.
 
-### 4. Predict Locations of Power Plants
+#### Reduce Image Resolution (Optional):
+To decrease the resolution of images for specific use cases:
+```bash
+python3 res_decreaser.py
+```
+
+#### Crop Images to a Specific Aspect Ratio (Optional):
+To crop images to a desired aspect ratio:
+```bash
+python3 aspect.py
+```
+
+### 2. Predict Power Plant Locations
+Run the predictor script to predict power plant locations:
 ```bash
 cd ..
 python3 predictor.py
 ```
 
-### 5. Finding Ideal Powergrid Locations
+### 3. Find Ideal Power Grid Locations
+#### Using Night Time Lights Data:
 ```bash
 python3 locator.py
 ```
+#### Using Temporal Analysis:
+```bash
+python3 locator_Temporal.py
+```
+#### Using Layered Analysis (NTL + LULC):
+```bash
+python3 locator_layer.py
+```
+#### Using GHSL Data:
+```bash
+python3 locator_ghsl.py
+```
 
-### 6. Comparing the Night Lights results
-- go to the comparision folder
-- add your files : actual night lights data and the predicted ones
-- name the files as `{number}.png`
-- store them in the `Input` folder
-- to see the differences :
+### 4. Compare Night Lights Results
+#### Compute Differences:
 ```bash
 cd comparision
 python3 compare.py
 ```
-- to see the growth of places each year:
+#### Analyze Growth Over Time:
 ```bash
 python3 growth.py
 ```
-- to see how many years the lights were on :
+#### Analyze Years of Illumination:
 ```bash
 python3 growth2.py
 ```
-- finally you will see the output images in the `Output` folder.
-  - `actual_difference_2014_2022.png` tells the difference between first actual year vs last actual year
-  - `prediction_difference_2022_2032.png` tells the difference between firest predicted year vs last predicted year
-  - `complete_difference_2014_2032.png` tells the difference between first actual year vs last predicted year
+Results will be saved in the `Output` folder.
 
 ---
 
-# File Structure
-
+## File Structure
 ```
 Smart_Grid_BTP-1/
 ├── README.md           # Project description and documentation
-├── readme.md          # Instructions to run the code
-├── requirements.txt   # Python package dependencies
-├── predictor.py       # Main prediction script
-├── Png_Files/        # Converted PNG image files
-│   ├── LULC/        # Land Use Land Cover PNG images (2014-2022)
-│   └── NTL/         # Night Time Lights PNG images (2014-2022)
-├── preprocess/
-│   └── converter.py  # Script to convert TIFF files to PNG
-└── Tiff_files/      # Source TIFF image files
-    ├── LULC/        # Land Use Land Cover TIFF images (2014-2022)
-    └── NTL/         # Night Time Lights TIFF images (2014-2022)
+├── requirements.txt    # Python package dependencies
+├── predictor.py        # Main prediction script
+├── preprocess/         # Preprocessing scripts
+│   ├── converter.py    # Convert TIFF to PNG
+│   ├── res_decreaser.py # Reduce image resolution
+│   └── aspect.py       # Crop images to specific aspect ratio
+├── comparision/        # Scripts for comparing results
+│   ├── compare.py      # Compute differences between images
+│   ├── growth.py       # Analyze growth over time
+│   └── growth2.py      # Analyze years of illumination
+├── locator.py          # Predict grid locations using NTL
+├── locator_Temporal.py # Predict grid locations using temporal analysis
+├── locator_layer.py    # Predict grid locations using layered analysis
+├── locator_ghsl.py     # Predict grid locations using GHSL data
+├── Png_Files/          # Processed PNG files
+├── Tiff_files/         # Source TIFF files
+└── Data/               # Results and additional data
 ```
 
-# Datasets
-- NightLights : [VIIRS](https://developers.google.com/earth-engine/datasets/catalog/NOAA_VIIRS_DNB_MONTHLY_V1_VCMCFG)
-- lulc : [MODIS](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MCD12Q1)
-- model : [Kaggle](https://www.kaggle.com/code/susheelkrishna2/ntl-predictions)
-- GHSL : [Google Earth Engine](https://developers.google.com/earth-engine/datasets/catalog/JRC_GHSL_P2023A_GHS_BUILT_S#description)
-- Final Presentation: [canva](https://www.canva.com/design/DAGmd8N1DDk/a3d2r4E0oYxRFX2EjkxoAw/edit?utm_content=DAGmd8N1DDk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+---
 
-# Notes :
-- unable to get OSM data because it is very high resolution and out night lights data is covered over nearly 25K sqkm. so as a proxy to the osm, we are using ghsl data.
-- ghsl data is available from 1975 to 2030 for every 5 years only. so while comparing, we are comparing only every 5th year!
+## Datasets
+- **Night Time Lights (NTL):** [VIIRS](https://developers.google.com/earth-engine/datasets/catalog/NOAA_VIIRS_DNB_MONTHLY_V1_VCMCFG)
+- **Land Use Land Cover (LULC):** [MODIS](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MCD12Q1)
+- **Global Human Settlement Layer (GHSL):** [Google Earth Engine](https://developers.google.com/earth-engine/datasets/catalog/JRC_GHSL_P2023A_GHS_BUILT_S#description)
+- **Model:** [Kaggle](https://www.kaggle.com/code/susheelkrishna2/ntl-predictions)
 
-  # Thank You
+---
+
+## Notes
+- **OSM Data:** Due to high resolution, OSM data was not used. GHSL data serves as a proxy.
+- **GHSL Data:** Available every 5 years from 1975 to 2030. Comparisons are made for every 5th year.
+
+---
+
+## Acknowledgments
+- **Final Presentation:** [Canva](https://www.canva.com/design/DAGmd8N1DDk/a3d2r4E0oYxRFX2EjkxoAw/edit?utm_content=DAGmd8N1DDk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+Thank you for exploring this project!
